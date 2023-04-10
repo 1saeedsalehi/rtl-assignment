@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Rtl.MazeScrapper.Domain.Exceptions;
+namespace Rtl.TvMaze.Domain.Exceptions;
 
 public class DomainLogicException : Exception
 {

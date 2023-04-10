@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rtl.MazeScrapper.Domain.Entities;
+using Rtl.TvMaze.Domain.Entities;
 
 namespace Rtl.TvMaze.Persistence.Configurations;
 

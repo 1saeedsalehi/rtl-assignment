@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Rtl.TvMaze.Application.Behavoiors;
+namespace Rtl.TvMaze.Application.Behaviors;
 
 
 public class ExceptionHandlingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull

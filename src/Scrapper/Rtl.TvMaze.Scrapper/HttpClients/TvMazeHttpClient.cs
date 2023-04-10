@@ -1,8 +1,8 @@
-﻿using Rtl.MazeScrapper.Application.HttpClients.Dtos;
-using Rtl.TvMaze.Infrastructure;
+﻿using Rtl.TvMaze.Infrastructure;
+using Rtl.TvMaze.Scrapper.HttpClients.Dtos;
 using System.Net.Http.Json;
 
-namespace Rtl.MazeScrapper.Application.HttpClients;
+namespace Rtl.TvMaze.Scrapper.HttpClients;
 
 public class TvMazeHttpClient : ITvMazeHttpClient
 {

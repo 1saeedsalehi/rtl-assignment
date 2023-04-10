@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using Polly;
 using Polly.RateLimit;
-using Rtl.MazeScrapper.Application.HttpClients;
 using Rtl.TvMaze.Infrastructure;
-using Rtl.TvMaze.Scrapper.Middleware;
+using Rtl.TvMaze.Scrapper.HttpClients;
 using System.Net;
 
-namespace Rtl.MazeScrapper;
+namespace Rtl.TvMaze.Scrapper;
 
 public static class StartupExtensions
 {
@@ -44,7 +42,7 @@ public static class StartupExtensions
                 (_, _, _, _) => Task.CompletedTask);
     }
 
- 
+
 
     /// <summary>
     /// Adds Http client services for scrapping the TvMaze api
@@ -73,5 +71,5 @@ public static class StartupExtensions
 
     }
 
-    
+
 }

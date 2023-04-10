@@ -1,6 +1,6 @@
-﻿using Rt.TvMaze.Presentation.Middleware;
+﻿using Rtl.TvMaze.Presentation.Middleware;
 
-namespace Rt.TvMaze.Presentation.Extensions;
+namespace Rtl.TvMaze.Presentation.Extensions;
 
 public static class ApplicationBuilderExtensions
 {

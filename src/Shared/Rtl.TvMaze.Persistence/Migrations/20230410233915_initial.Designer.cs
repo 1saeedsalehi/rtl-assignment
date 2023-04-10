@@ -10,7 +10,7 @@ using Rtl.TvMaze.Persistence;
 namespace Rtl.TvMaze.Persistence.Migrations
 {
     [DbContext(typeof(TvMazeDbContext))]
-    [Migration("20230410201320_initial")]
+    [Migration("20230410233915_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace Rtl.TvMaze.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
-            modelBuilder.Entity("Rtl.MazeScrapper.Domain.Entities.Artist", b =>
+            modelBuilder.Entity("Rtl.TvMaze.Domain.Entities.Artist", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,13 +43,13 @@ namespace Rtl.TvMaze.Persistence.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("Rtl.MazeScrapper.Domain.Entities.TvShow", b =>
+            modelBuilder.Entity("Rtl.TvMaze.Domain.Entities.TvShow", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
@@ -59,9 +59,9 @@ namespace Rtl.TvMaze.Persistence.Migrations
                     b.ToTable("TvShows");
                 });
 
-            modelBuilder.Entity("Rtl.MazeScrapper.Domain.Entities.Artist", b =>
+            modelBuilder.Entity("Rtl.TvMaze.Domain.Entities.Artist", b =>
                 {
-                    b.HasOne("Rtl.MazeScrapper.Domain.Entities.TvShow", "TvShow")
+                    b.HasOne("Rtl.TvMaze.Domain.Entities.TvShow", "TvShow")
                         .WithMany("Cast")
                         .HasForeignKey("ShowId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -70,7 +70,7 @@ namespace Rtl.TvMaze.Persistence.Migrations
                     b.Navigation("TvShow");
                 });
 
-            modelBuilder.Entity("Rtl.MazeScrapper.Domain.Entities.TvShow", b =>
+            modelBuilder.Entity("Rtl.TvMaze.Domain.Entities.TvShow", b =>
                 {
                     b.Navigation("Cast");
                 });

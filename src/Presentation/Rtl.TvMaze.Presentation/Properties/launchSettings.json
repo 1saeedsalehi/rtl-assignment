@@ -1,7 +1,7 @@
 {
   "profiles": {
-   
-    "https": {
+
+    "Rtl.TvMaze.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -11,7 +11,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
-    
+
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {

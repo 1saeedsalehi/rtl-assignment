@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Rtl.MazeScrapper.Application.HttpClients;
-using Rtl.MazeScrapper.Domain.Entities;
+using Rtl.TvMaze.Domain.Entities;
 using Rtl.TvMaze.Infrastructure;
 using Rtl.TvMaze.Persistence;
+using Rtl.TvMaze.Scrapper.HttpClients;
 
-namespace Rtl.MazeScrapper.Application.BackgroundJobs;
+namespace Rtl.TvMaze.Scrapper.BackgroundJobs;
 
 
 public class ScrapBackgroundJob : BackgroundService
@@ -31,7 +31,7 @@ public class ScrapBackgroundJob : BackgroundService
         _logger.LogInformation("start getting tv shows");
 
 
-            var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.AsNoTracking().Max(show => show.Id) : 0;
+        var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.AsNoTracking().Max(show => show.Id) : 0;
         var pageNumber = (int)Math.Ceiling((double)LastId / Constants.PageSize);
 
         List<TvShow> tvShows = new();

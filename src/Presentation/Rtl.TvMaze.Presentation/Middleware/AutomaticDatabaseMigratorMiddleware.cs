@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
 using Rtl.TvMaze.Persistence;
 
-namespace Rtl.TvMaze.Scrapper.Middleware;
+namespace Rtl.TvMaze.Presentation.Middleware;
 
-internal class AutomaticDatabaseMigratorMiddleware : IMiddleware
+public class AutomaticDatabaseMigratorMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)
     {
         var db = httpContext.RequestServices.GetRequiredService<TvMazeDbContext>();
 
-        if (await db.Database.EnsureCreatedAsync())
+        if (db.Database.IsRelational())
         {
             await db.Database.MigrateAsync(httpContext.RequestAborted);
         }

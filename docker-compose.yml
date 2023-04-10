@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  tvmaze_api:
+    image: tvmaze_api:latest
+    container_name: tvmaze_api
+    build:
+      context: .
+      dockerfile: ./src/Presentation/Rtl.TvMaze.Presentation/Dockerfile
+    ports:
+      - "5000:80"
+  tvmaze_scrapper:
+    image: tvmaze_scrapper:latest
+    container_name: tvmaze_scrapper
+    build:
+      context: .
+      dockerfile: ./src/Scrapper/Rtl.TvMaze.Scrapper/Dockerfile
+      
+      

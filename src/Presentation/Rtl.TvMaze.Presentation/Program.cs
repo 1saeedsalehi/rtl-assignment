@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Rt.TvMaze.Presentation.Extensions;
-using Rt.TvMaze.Presentation.Middleware;
-using Rtl.MazeScrapper.Application.Queries;
+using Rtl.TvMaze.Application.Queries;
 using Rtl.TvMaze.Persistence;
+using Rtl.TvMaze.Presentation.Extensions;
+using Rtl.TvMaze.Presentation.Middleware;
 using System.Text.Json.Serialization;
 
-namespace Rtl.MazeScrapper;
+namespace Rtl.TvMaze.Presentation;
 
 public class Program
 {
-
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +26,9 @@ public class Program
 
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTvShowsQueryHandler).Assembly));
 
+        //Add sqlite database
         var dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TvMaze.db");
-        string? connectionString = string.Format(builder.Configuration.GetConnectionString("Default"),dbPath);
+        string? connectionString = string.Format(builder.Configuration.GetConnectionString("Default"), dbPath);
         builder.Services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(connectionString));
 
 
@@ -38,7 +38,6 @@ public class Program
 
 
         // Configure the HTTP request pipeline.
-
         app.UseAutomaticDatabaseMigrator();
 
         if (app.Environment.IsDevelopment())
@@ -57,6 +56,6 @@ public class Program
         app.Run();
     }
 
-  
-   
+
+
 }

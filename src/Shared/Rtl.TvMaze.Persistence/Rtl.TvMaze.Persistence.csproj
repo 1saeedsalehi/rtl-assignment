@@ -19,7 +19,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Rtl.MazeScrapper.Domain\Rtl.TvMaze.Domain.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Migrations\" />
-	</ItemGroup>
 </Project>

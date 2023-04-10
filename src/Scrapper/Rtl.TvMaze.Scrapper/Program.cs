@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Rtl.MazeScrapper;
-using Rtl.MazeScrapper.Application.BackgroundJobs;
 using Rtl.TvMaze.Persistence;
-using Rtl.TvMaze.Scrapper.Middleware;
+using Rtl.TvMaze.Scrapper.BackgroundJobs;
 
 namespace Rtl.TvMaze.Scrapper;
 
@@ -28,6 +25,7 @@ internal class Program
             })
             .Build();
 
+
         var db = app.Services.GetRequiredService<TvMazeDbContext>();
 
         if (db.Database.IsRelational())
@@ -45,12 +43,11 @@ internal class Program
 
         services.AddTvMazeClient(configuration);
 
-
+        //Add sqlite database
         var dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TvMaze.db");
         string? connectionString = string.Format(configuration.GetConnectionString("Default"), dbPath);
         services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(connectionString));
 
-        services.AddScoped<AutomaticDatabaseMigratorMiddleware>();
     }
 
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rtl.MazeScrapper.Domain.Entities;
+using Rtl.TvMaze.Domain.Entities;
 using System.Reflection;
 
 namespace Rtl.TvMaze.Persistence;

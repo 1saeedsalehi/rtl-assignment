@@ -1,11 +1,10 @@
-﻿using Rtl.MazeScrapper.Domain.Exceptions;
-using Rtl.TvMaze.Domain.Entities;
+﻿using Rtl.TvMaze.Domain.Exceptions;
 
-namespace Rtl.MazeScrapper.Domain.Entities;
+namespace Rtl.TvMaze.Domain.Entities;
 
 public class TvShow : BaseEntity<long>
 {
-    public string Title { get; init; }
+    public string Name { get; init; }
     public ICollection<Artist> Cast { get; init; }
 
     public TvShow()
@@ -16,7 +15,7 @@ public class TvShow : BaseEntity<long>
     {
 
         if (string.IsNullOrWhiteSpace(name)) throw new DomainLogicException("title could not be empty", new ArgumentNullException(nameof(name)));
-        Title = name;
+        Name = name;
 
         Cast = cast;
     }

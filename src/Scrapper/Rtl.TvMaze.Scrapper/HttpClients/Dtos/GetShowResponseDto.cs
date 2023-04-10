@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Rtl.MazeScrapper.Application.HttpClients.Dtos;
+namespace Rtl.TvMaze.Scrapper.HttpClients.Dtos;
 
 public class GetShowResponseDto
 {

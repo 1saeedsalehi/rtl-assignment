@@ -1,9 +1,9 @@
-﻿namespace Rtl.MazeScrapper.Domain.Dtos;
+﻿namespace Rtl.TvMaze.Infrastructure.Dtos;
 
-public class PagedResponse<T> 
+public class PagedResponse<T>
 {
     public T Result { get; init; }
-        
+
     public int TotalCount { get; init; }
 
     public PagedResponse(T result, int totalCount)

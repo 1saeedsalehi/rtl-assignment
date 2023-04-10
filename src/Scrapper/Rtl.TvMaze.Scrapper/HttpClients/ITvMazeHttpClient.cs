@@ -1,6 +1,6 @@
-﻿using Rtl.MazeScrapper.Application.HttpClients.Dtos;
+﻿using Rtl.TvMaze.Scrapper.HttpClients.Dtos;
 
-namespace Rtl.MazeScrapper.Application.HttpClients;
+namespace Rtl.TvMaze.Scrapper.HttpClients;
 
 public interface ITvMazeHttpClient
 {

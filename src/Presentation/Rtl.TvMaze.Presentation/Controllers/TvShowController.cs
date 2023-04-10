@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Rtl.MazeScrapper.Application.Queries;
+using Rtl.TvMaze.Application.Queries;
 
-namespace Rtl.MazeScrapper.Controllers;
+namespace Rtl.TvMaze.Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,7 +16,6 @@ public class TvShowController : ControllerBase
     }
 
     [HttpGet]
-    [Route("shows")]
     public async Task<IActionResult> GetTvShows([FromQuery] GetTvShowsQuery request,
         CancellationToken cancellationToken)
     {

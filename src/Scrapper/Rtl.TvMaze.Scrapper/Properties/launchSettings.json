@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Rtl.TvMaze.Scrapper": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
