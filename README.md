@@ -7,7 +7,7 @@ The service scrapes TVMaze for TV show & cast info & persists it. A RESTful API 
 - EF Core 7.0 + Sqlite
 - Polly
 - MediatR 
-- Docker 
+- Docker + Docker Compose
 - swagger 
 
 # How to run
