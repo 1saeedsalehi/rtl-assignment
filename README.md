@@ -28,7 +28,7 @@ docker compose up
 then 
 navigate to [https://localhost:5001/swagger](https://localhost:5001/swagger/index.html)
 
-# Trade-offs and expansion points
+# Additions
 
 Since this service is for testing purposes, the items related to the real-world solution are not fully observed.
 some of my personal preference in a real-world scenarios are listed below:
