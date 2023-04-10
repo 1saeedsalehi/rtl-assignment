@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper", "Rtl.MazeScrapper.csproj", "{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rtl.MazeScrapper", "Rtl.MazeScrapper.csproj", "{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper.Domain", "..\Rtl.MazeScrapper.Domain\Rtl.MazeScrapper.Domain.csproj", "{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rtl.MazeScrapper.Domain", "..\Rtl.MazeScrapper.Domain\Rtl.MazeScrapper.Domain.csproj", "{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper.Application", "..\Rtl.MazeScrapper.Application\Rtl.MazeScrapper.Application.csproj", "{8C6219E3-6551-4D92-9BFE-D7239B6ED658}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rtl.MazeScrapper.Application", "..\Rtl.MazeScrapper.Application\Rtl.MazeScrapper.Application.csproj", "{8C6219E3-6551-4D92-9BFE-D7239B6ED658}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
