@@ -2,7 +2,7 @@
 This is a test project for TVMaze scrapper. 
 The service scrapes TVMaze for TV show & cast info & persists it. A RESTful API provides a paginated list of shows and cast. 
 
-# Used technologies
+# Technologies
 - Asp.Net Core / .NET 7.0
 - EF Core 7.0 + Sqlite
 - Polly
