@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Shared\Rtl.TvMaze.Infrastructure\Rtl.TvMaze.Infrastructure.csproj" />
 		<ProjectReference Include="..\Rtl.MazeScrapper.Application\Rtl.TvMaze.Application.csproj" />
 	</ItemGroup>
 

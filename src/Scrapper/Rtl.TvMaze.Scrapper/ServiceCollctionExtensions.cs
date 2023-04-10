@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using Polly;
 using Polly.RateLimit;
 using Rtl.MazeScrapper.Application.HttpClients;
 using Rtl.TvMaze.Infrastructure;
+using Rtl.TvMaze.Scrapper.Middleware;
 using System.Net;
 
 namespace Rtl.MazeScrapper;
@@ -35,10 +37,6 @@ public static class StartupExtensions
                         return rateLimitRejectedException.RetryAfter + TimeSpan.FromMilliseconds(value: 100);
                     }
 
-                    //if (retryAttempt > 5)
-                    //{
-                    //    throw delegateResult.Exception ?? new Exception(message: "Retry attempt is greater than 5");
-                    //}
 
                     return TimeSpan.FromSeconds(Math.Pow(x: 2, retryAttempt)) // exponential back-off
                            + TimeSpan.FromMilliseconds(Random.Shared.Next(minValue: 0, maxValue: 100)); // jitter
@@ -74,4 +72,6 @@ public static class StartupExtensions
         return services;
 
     }
+
+    
 }
