@@ -31,7 +31,11 @@ navigate to [https://localhost:5001/swagger](https://localhost:5001/swagger/inde
 # Trade-offs and expansion points
 
 Since this service is for testing purposes, the items related to the real-world solution are not fully observed.
-My personal preference in a real-world service is to use `Hangfire` to manage background jobs and handle exceptions in database updates.
+some of my personal preference in a real-world scenarios are listed below:
+ - Use `Hangfire`  to manage background jobs 
+ - Handle all scenarios when updating the data
+ - Use a prdocution-ready database instead of `Sqlite`
+ - Integrate with redis for cache 
 
 
 ⚠️ I've provided a simpler solution which stores data on `MemoryCache`
