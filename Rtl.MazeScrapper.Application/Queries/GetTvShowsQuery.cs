@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
 using Rtl.MazeScrapper.Domain;
 using Rtl.MazeScrapper.Domain.Dtos;
 using Rtl.MazeScrapper.Domain.Entities;
-using System.Text.Json;
 
 namespace Rtl.MazeScrapper.Application.Queries;
 
 public class GetTvShowsQuery : IRequest<PagedResponse<IEnumerable<TvShow>>>
 {
-    public int Page { get; set; } = 1;
+    public int Page { get; set; } = 0;
     public int ItemCount { get; set; } = 10;
 
 }
@@ -30,16 +30,16 @@ public class GetTvShowsQueryHandler : IRequestHandler<GetTvShowsQuery, PagedResp
         if (allShowIndexes is null)
             return default;
 
-        var showIndexes = JsonSerializer.Deserialize<IEnumerable<int>>(allShowIndexes);
+        var showIndexes = JsonConvert.DeserializeObject<(IEnumerable<int> showIds, int lastPage)>(allShowIndexes);
 
-        var shows = showIndexes
+        var shows = showIndexes.showIds
             .Skip(request.Page * request.ItemCount)
             .Take(request.ItemCount)
             .Select(async showId => await GetTVShowAsync(showId, cancellationToken))
                 .Select(task => task.Result)
             .AsEnumerable();
 
-        return new PagedResponse<IEnumerable<TvShow>>(shows, showIndexes.Count());
+        return new PagedResponse<IEnumerable<TvShow>>(shows, showIndexes.showIds.Count());
     }
 
     private async Task<TvShow> GetTVShowAsync(int showId, CancellationToken cancellationToken = default)
@@ -48,6 +48,6 @@ public class GetTvShowsQueryHandler : IRequestHandler<GetTvShowsQuery, PagedResp
         if (cached is null || string.IsNullOrEmpty(cached))
             return default;
 
-        return JsonSerializer.Deserialize<TvShow>(cached);
+        return JsonConvert.DeserializeObject<TvShow>(cached);
     }
 }

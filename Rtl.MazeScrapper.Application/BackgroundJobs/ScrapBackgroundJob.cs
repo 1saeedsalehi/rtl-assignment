@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Rtl.MazeScrapper.Application.HttpClients;
 using Rtl.MazeScrapper.Domain;
 using Rtl.MazeScrapper.Domain.Entities;
-using System.Text.Json;
 
 namespace Rtl.MazeScrapper.Application.BackgroundJobs;
 
@@ -38,7 +38,7 @@ public class ScrapBackgroundJob : BackgroundService
 
         if (cached is not null)
         {
-            var cachedData = JsonSerializer.Deserialize<(List<int> showIds, int lastPage)>(cached);
+            var cachedData = JsonConvert.DeserializeObject<(List<int> showIds, int lastPage)>(cached);
             var response = await _tvMazeHttpClient.GetShowsAsync(cachedData.lastPage, stoppingToken);
 
             var hasNewItem = response?.Select(x => x.Id).Max() > cachedData.showIds.Max();
@@ -73,7 +73,7 @@ public class ScrapBackgroundJob : BackgroundService
         (IEnumerable<int> showIds, int lastPage) dataToPersist = (showIds.ToList(), pageNumber);
 
         await _distributedCache.SetStringAsync(Constants.AllShowsCacheKey,
-            JsonSerializer.Serialize(dataToPersist),
+            JsonConvert.SerializeObject(dataToPersist),
             stoppingToken);
 
 
@@ -82,14 +82,18 @@ public class ScrapBackgroundJob : BackgroundService
             await GetShowDetail(showId, stoppingToken);
         }));
 
+
+
     }
 
     private async Task GetShowDetail(int showId, CancellationToken cancellationToken)
     {
 
+
         _logger.LogInformation($"getting show details for id {showId}");
 
         var showDetail = await _tvMazeHttpClient.GetShowDetailAsync(showId, cancellationToken);
+
         var tvShow = new TvShow(
             showDetail.Id,
             showDetail.Name,
@@ -104,7 +108,8 @@ public class ScrapBackgroundJob : BackgroundService
 
         await _distributedCache.SetStringAsync(
             Constants.GetShowCacheKey(tvShow.Id),
-            JsonSerializer.Serialize(tvShow),
+            JsonConvert.SerializeObject(tvShow),
             cancellationToken);
+
     }
 }
