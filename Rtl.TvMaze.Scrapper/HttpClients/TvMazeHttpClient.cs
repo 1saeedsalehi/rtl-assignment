@@ -9,9 +9,9 @@ public class TvMazeHttpClient : ITvMazeHttpClient
 {
     private readonly HttpClient _httpClient;
 
-    public TvMazeHttpClient(HttpClient httpClient)
+    public TvMazeHttpClient(IHttpClientFactory clientFactory)
     {
-        _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        _httpClient = clientFactory.CreateClient(Constants.TvMazeHttpClient);// ?? throw new ArgumentNullException(nameof(httpClient));
 
     }
 
@@ -26,13 +26,20 @@ public class TvMazeHttpClient : ITvMazeHttpClient
         catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
             return null;
-
         }
     }
 
     public async Task<GetShowDetailResponseDto?> GetShowDetailAsync(int showId, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.GetFromJsonAsync<GetShowDetailResponseDto>($"shows/{showId}?embed=cast", cancellationToken);
-        return response;
+        try
+        {
+            var response = await _httpClient.GetFromJsonAsync<GetShowDetailResponseDto>($"shows/{showId}?embed=cast", cancellationToken);
+            return response;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
     }
 }

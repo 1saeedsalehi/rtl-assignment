@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
-using Rtl.MazeScrapper.Domain;
+using Microsoft.EntityFrameworkCore;
 using Rtl.MazeScrapper.Domain.Dtos;
 using Rtl.MazeScrapper.Domain.Entities;
+using Rtl.TvMaze.Persistence;
 
 namespace Rtl.MazeScrapper.Application.Queries;
 
@@ -16,38 +15,26 @@ public class GetTvShowsQuery : IRequest<PagedResponse<IEnumerable<TvShow>>>
 
 public class GetTvShowsQueryHandler : IRequestHandler<GetTvShowsQuery, PagedResponse<IEnumerable<TvShow>>>
 {
-    private readonly IDistributedCache _distributedCache;
+    private readonly TvMazeDbContext _dbContext;
 
-    public GetTvShowsQueryHandler(IDistributedCache distributedCache)
+    public GetTvShowsQueryHandler(TvMazeDbContext dbContext)
     {
-        _distributedCache = distributedCache;
+        _dbContext = dbContext;
     }
 
     public async Task<PagedResponse<IEnumerable<TvShow>>> Handle(GetTvShowsQuery request,
         CancellationToken cancellationToken)
     {
-        var allShowIndexes = await _distributedCache.GetStringAsync(Constants.AllShowsCacheKey, cancellationToken);
-        if (allShowIndexes is null)
-            return default;
+        var totalCount = await _dbContext.TvShows.AsNoTracking().CountAsync(cancellationToken);
 
-        var showIndexes = JsonConvert.DeserializeObject<(IEnumerable<int> showIds, int lastPage)>(allShowIndexes);
-
-        var shows = showIndexes.showIds
+        var tvShows = await _dbContext.TvShows
+            .AsNoTracking()
             .Skip(request.Page * request.ItemCount)
             .Take(request.ItemCount)
-            .Select(async showId => await GetTVShowAsync(showId, cancellationToken))
-                .Select(task => task.Result)
-            .AsEnumerable();
+                .Include(x => x.Cast)
+            .ToListAsync(cancellationToken);
 
-        return new PagedResponse<IEnumerable<TvShow>>(shows, showIndexes.showIds.Count());
+        return new PagedResponse<IEnumerable<TvShow>>(tvShows, totalCount);
     }
 
-    private async Task<TvShow> GetTVShowAsync(int showId, CancellationToken cancellationToken = default)
-    {
-        var cached = await _distributedCache.GetStringAsync(Constants.GetShowCacheKey(showId), cancellationToken);
-        if (cached is null || string.IsNullOrEmpty(cached))
-            return default;
-
-        return JsonConvert.DeserializeObject<TvShow>(cached);
-    }
 }

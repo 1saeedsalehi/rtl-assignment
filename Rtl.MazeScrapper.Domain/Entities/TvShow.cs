@@ -1,12 +1,12 @@
 ﻿using Rtl.MazeScrapper.Domain.Exceptions;
+using Rtl.TvMaze.Domain.Entities;
 
 namespace Rtl.MazeScrapper.Domain.Entities;
 
-public class TvShow
+public class TvShow : BaseEntity<long>
 {
-    public long Id { get; init; }
     public string Title { get; init; }
-    public List<Artist> Cast { get; init; }
+    public ICollection<Artist> Cast { get; init; }
 
     public TvShow()
     {

@@ -1,4 +1,6 @@
-﻿using Polly;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Polly;
 using Polly.RateLimit;
 using Rtl.MazeScrapper.Application.HttpClients;
 using Rtl.MazeScrapper.Domain;
@@ -13,6 +15,8 @@ public static class StartupExtensions
         return Policy<HttpResponseMessage>
             .Handle<HttpRequestException>(x => x.StatusCode is null ||
                                                x.StatusCode is HttpStatusCode.RequestTimeout or
+                                                               HttpStatusCode.ServiceUnavailable or
+                                                               HttpStatusCode.InternalServerError or
                                                                HttpStatusCode.TooManyRequests or not
                                                                HttpStatusCode.NotFound)
 
@@ -64,20 +68,22 @@ public static class StartupExtensions
     {
         var baseUrl = configuration.GetValue<string>("TvMaze:BaseUrl");
 
-        if (string.IsNullOrEmpty(baseUrl))
-            throw new ArgumentNullException(nameof(baseUrl));
+        //if (string.IsNullOrEmpty(baseUrl))
+        //    throw new ArgumentNullException(nameof(baseUrl));
 
         var retryPolicy = GetRetryPolicy();
         var rateLimitPolicy = GetRateLimitPolicy(numberOfExections: 100, TimeSpan.FromSeconds(value: 10));
         var timeOutPolicy = GetTimeoutPolicy();
         var resilienceStrategy = Policy.WrapAsync(retryPolicy, rateLimitPolicy, timeOutPolicy);
 
-        services.AddHttpClient<ITvMazeHttpClient, TvMazeHttpClient>(Constants.TvMazeHttpClient, options =>
+        services.AddScoped<ITvMazeHttpClient, TvMazeHttpClient>();
+
+        services.AddHttpClient(Constants.TvMazeHttpClient, options =>
         {
             options.BaseAddress = new Uri(baseUrl);
         })
             .SetHandlerLifetime(TimeSpan.FromMinutes(15))
-            .AddPolicyHandler(resilienceStrategy);
+            .AddPolicyHandler(retryPolicy);
 
         return services;
 
