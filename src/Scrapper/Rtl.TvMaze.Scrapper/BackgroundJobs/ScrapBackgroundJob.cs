@@ -31,7 +31,7 @@ public class ScrapBackgroundJob : BackgroundService
         _logger.LogInformation("start getting tv shows");
 
 
-        var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.AsNoTracking().Max(show => show.Id) : 0;
+            var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.AsNoTracking().Max(show => show.Id) : 0;
         var pageNumber = (int)Math.Ceiling((double)LastId / Constants.PageSize);
 
         List<TvShow> tvShows = new();

@@ -21,7 +21,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Rtl.MazeScrapper.Application\Rtl.TvMaze.Application.csproj" />
-		<ProjectReference Include="..\Rtl.TvMaze.Persistence\Rtl.TvMaze.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>

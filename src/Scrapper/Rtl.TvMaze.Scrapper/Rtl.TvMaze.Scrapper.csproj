@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="..\Rtl.MazeScrapper\appsettings.json" Link="appsettings.json">
+	  <Content Include="..\..\Presentation\Rt.TvMaze.Presentation\appsettings.json" Link="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
@@ -36,9 +36,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Rtl.MazeScrapper.Domain\Rtl.TvMaze.Domain.csproj" />
-		<ProjectReference Include="..\Rtl.TvMaze.Infrastructure\Rtl.TvMaze.Infrastructure.csproj" />
-		<ProjectReference Include="..\Rtl.TvMaze.Persistence\Rtl.TvMaze.Persistence.csproj" />
+	  <ProjectReference Include="..\..\Shared\Rtl.MazeScrapper.Domain\Rtl.TvMaze.Domain.csproj" />
+	  <ProjectReference Include="..\..\Shared\Rtl.TvMaze.Infrastructure\Rtl.TvMaze.Infrastructure.csproj" />
+	  <ProjectReference Include="..\..\Shared\Rtl.TvMaze.Persistence\Rtl.TvMaze.Persistence.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

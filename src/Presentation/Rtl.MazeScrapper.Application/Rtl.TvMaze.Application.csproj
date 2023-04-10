@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rtl.MazeScrapper.Domain\Rtl.TvMaze.Domain.csproj" />
-    <ProjectReference Include="..\Rtl.TvMaze.Persistence\Rtl.TvMaze.Persistence.csproj" />
+    <ProjectReference Include="..\..\Shared\Rtl.MazeScrapper.Domain\Rtl.TvMaze.Domain.csproj" />
+    <ProjectReference Include="..\..\Shared\Rtl.TvMaze.Persistence\Rtl.TvMaze.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

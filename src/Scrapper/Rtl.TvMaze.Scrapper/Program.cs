@@ -37,7 +37,7 @@ internal class Program
 
         services.AddTvMazeClient(configuration);
 
-        services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(configuration.GetConnectionString("Default")));
+        services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(configuration.GetConnectionString(string.Format("Default",""))));
     }
 
 
