@@ -5,6 +5,10 @@ VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper", "Rtl.MazeScrapper.csproj", "{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper.Domain", "..\Rtl.MazeScrapper.Domain\Rtl.MazeScrapper.Domain.csproj", "{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rtl.MazeScrapper.Application", "..\Rtl.MazeScrapper.Application\Rtl.MazeScrapper.Application.csproj", "{8C6219E3-6551-4D92-9BFE-D7239B6ED658}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BBFC94C-1BB8-4FD0-BFB0-F22AB3DE35C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA57AC1-1526-40EE-B662-3ABFAD78AB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6219E3-6551-4D92-9BFE-D7239B6ED658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6219E3-6551-4D92-9BFE-D7239B6ED658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6219E3-6551-4D92-9BFE-D7239B6ED658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6219E3-6551-4D92-9BFE-D7239B6ED658}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
