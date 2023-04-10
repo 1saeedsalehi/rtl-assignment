@@ -34,9 +34,10 @@ internal class Program
     {
         services.AddHostedService<ScrapBackgroundJob>();
 
+
         services.AddTvMazeClient(configuration);
-        var dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "havij.db");
-        services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite($"Data Source={dbPath}"));
+
+        services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(configuration.GetConnectionString("Default")));
     }
 
 

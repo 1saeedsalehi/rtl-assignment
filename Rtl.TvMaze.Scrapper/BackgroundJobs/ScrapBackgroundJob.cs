@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Rtl.MazeScrapper.Application.HttpClients;
-using Rtl.MazeScrapper.Domain;
 using Rtl.MazeScrapper.Domain.Entities;
+using Rtl.TvMaze.Infrastructure;
 using Rtl.TvMaze.Persistence;
 
 namespace Rtl.MazeScrapper.Application.BackgroundJobs;
@@ -30,7 +31,7 @@ public class ScrapBackgroundJob : BackgroundService
         _logger.LogInformation("start getting tv shows");
 
 
-        var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.Max(show => show.Id) : 0;
+        var LastId = _dbContext.TvShows.Any() ? _dbContext.TvShows.AsNoTracking().Max(show => show.Id) : 0;
         var pageNumber = (int)Math.Ceiling((double)LastId / Constants.PageSize);
 
         List<TvShow> tvShows = new();
@@ -40,6 +41,7 @@ public class ScrapBackgroundJob : BackgroundService
             _logger.LogInformation($"scrapping tv shows page {pageNumber}");
 
             var response = await _tvMazeHttpClient.GetShowsAsync(pageNumber, stoppingToken);
+
             if (response is null)
             {
                 //finished scrapping...
@@ -52,20 +54,15 @@ public class ScrapBackgroundJob : BackgroundService
 
             var showIds = response.Select(x => x.Id).Distinct().OrderBy(x => x).ToList();
 
-
             var allTasks = showIds.Select(showId => GetShowDetail(showId, stoppingToken));
 
-            var a = await Task.WhenAll(allTasks);
-
-            //await Task.Run(() => Parallel.ForEach(showIds, async showId =>
-            //{
-            //    tvShows.Add(await GetShowDetail(showId, stoppingToken));
-            //}));
+            var allTvShows = await Task.WhenAll(allTasks);
 
 
+            _dbContext.TvShows.AddRange(allTvShows);
 
-            //_dbContext.AddRange(tvShow);
-            //await _dbContext.SaveChangesAsync(stoppingToken);
+
+            await _dbContext.SaveChangesAsync(stoppingToken);
 
         }
 
@@ -78,12 +75,11 @@ public class ScrapBackgroundJob : BackgroundService
         var showDetail = await _tvMazeHttpClient.GetShowDetailAsync(showId, stoppingToken);
 
         var tvShow = new TvShow(
-            showDetail.Id,
             showDetail.Name,
             showDetail.Embedded.Cast
                 .Select(cast =>
                     new Artist(
-                        cast.Person.Id,
+                        showId,
                         cast.Person.Name,
                         cast.Person.Birthday))
                 .OrderByDescending(p => p.Birthday)

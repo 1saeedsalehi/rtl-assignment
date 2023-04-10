@@ -19,17 +19,12 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTvShowsQueryHandler).Assembly));
-        //builder.Services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("Default")));
-        var dbPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "havij.db");
-        builder.Services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite($"Data Source={dbPath}"));
+
+        builder.Services.AddDbContext<TvMazeDbContext>(opt => opt.UseSqlite(builder.Configuration.GetConnectionString("Default")));
+  
         var app = builder.Build();
 
 
-        //using (var context = app.Services.GetRequiredService<TvMazeDbContext>())
-        //{
-        //    context.Database.EnsureCreated();
-        //    context.Database.Migrate();
-        //}
 
 
         // Configure the HTTP request pipeline.

@@ -12,10 +12,8 @@ public class TvShow : BaseEntity<long>
     {
     }
 
-    public TvShow(long id, string name, List<Artist> cast)
+    public TvShow(string name, List<Artist> cast)
     {
-        if (id <= 0) throw new DomainLogicException("id should be greater than 0", new ArgumentNullException(nameof(id)));
-        Id = id;
 
         if (string.IsNullOrWhiteSpace(name)) throw new DomainLogicException("title could not be empty", new ArgumentNullException(nameof(name)));
         Title = name;

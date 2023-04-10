@@ -12,11 +12,7 @@ public class TvShowConfiguration : IEntityTypeConfiguration<TvShow>
                .HasMaxLength(200)
                .IsRequired();
 
-        builder
-            .HasMany<Artist>()
-            .WithOne(x => x.TvShow)
-            .HasForeignKey("ShowId")
-            .HasPrincipalKey(x => x.Id);
+        
     }
 }
 

@@ -12,6 +12,11 @@ public class ArtistConfiguration : IEntityTypeConfiguration<Artist>
                .HasMaxLength(150)
                .IsRequired();
 
+        builder
+            .HasOne(x => x.TvShow)
+            .WithMany(x => x.Cast)
+            .HasForeignKey(x => x.ShowId);
+
     }
 }
 

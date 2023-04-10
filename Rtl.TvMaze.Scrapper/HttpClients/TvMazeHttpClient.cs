@@ -1,6 +1,5 @@
 ﻿using Rtl.MazeScrapper.Application.HttpClients.Dtos;
-using Rtl.MazeScrapper.Domain;
-using System.Net.Http;
+using Rtl.TvMaze.Infrastructure;
 using System.Net.Http.Json;
 
 namespace Rtl.MazeScrapper.Application.HttpClients;
@@ -31,15 +30,8 @@ public class TvMazeHttpClient : ITvMazeHttpClient
 
     public async Task<GetShowDetailResponseDto?> GetShowDetailAsync(int showId, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            var response = await _httpClient.GetFromJsonAsync<GetShowDetailResponseDto>($"shows/{showId}?embed=cast", cancellationToken);
-            return response;
-        }
-        catch (Exception ex)
-        {
+        var response = await _httpClient.GetFromJsonAsync<GetShowDetailResponseDto>($"shows/{showId}?embed=cast", cancellationToken);
+        return response;
 
-            throw;
-        }
     }
 }
