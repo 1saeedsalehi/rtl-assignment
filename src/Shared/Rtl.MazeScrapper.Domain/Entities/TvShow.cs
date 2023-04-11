@@ -5,7 +5,7 @@ namespace Rtl.TvMaze.Domain.Entities;
 public class TvShow : BaseEntity<long>
 {
     public string Name { get; init; }
-    public ICollection<Artist> Cast { get; init; }
+    public ICollection<Artist> Cast { get; init; } = new List<Artist>();
 
     public TvShow()
     {

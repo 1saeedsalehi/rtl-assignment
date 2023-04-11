@@ -11,7 +11,7 @@ namespace Rtl.TvMaze.Scrapper;
 
 public static class StartupExtensions
 {
-    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+    public static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
     {
         return Policy<HttpResponseMessage>
             .HandleResult(response => response.StatusCode is
