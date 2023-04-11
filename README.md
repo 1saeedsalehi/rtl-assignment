@@ -3,12 +3,13 @@ This is a test project for TVMaze scrapper.
 The service scrapes TVMaze for TV show & cast info & persists it. A RESTful API provides a paginated list of shows and cast. 
 
 # Technologies
+- C# 11
 - Asp.Net Core / .NET 7.0
 - EF Core 7.0 + Sqlite
 - Polly
 - MediatR 
 - Docker + Docker Compose
-- swagger 
+- xUnit, FluentAssertions, Moq 
 
 # How to run
 
